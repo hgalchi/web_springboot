@@ -1,4 +1,4 @@
-package com.example.WebSpringboot.Entity;
+package com.example.WebSpringboot.part01.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

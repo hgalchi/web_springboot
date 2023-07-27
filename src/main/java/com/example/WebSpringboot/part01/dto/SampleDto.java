@@ -1,4 +1,4 @@
-package com.example.WebSpringboot.dto;
+package com.example.WebSpringboot.part01.dto;
 
 import lombok.Builder;
 import lombok.Data;

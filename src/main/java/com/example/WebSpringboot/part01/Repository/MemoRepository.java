@@ -1,6 +1,6 @@
-package com.example.WebSpringboot.Repository;
+package com.example.WebSpringboot.part01.Repository;
 
-import com.example.WebSpringboot.Entity.Memo;
+import com.example.WebSpringboot.part01.Entity.Memo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

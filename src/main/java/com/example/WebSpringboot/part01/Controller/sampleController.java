@@ -1,6 +1,6 @@
-package com.example.WebSpringboot.Controller;
+package com.example.WebSpringboot.part01.Controller;
 
-import com.example.WebSpringboot.dto.SampleDto;
+import com.example.WebSpringboot.part01.dto.SampleDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

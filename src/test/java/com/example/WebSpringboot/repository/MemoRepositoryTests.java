@@ -1,8 +1,8 @@
 package com.example.WebSpringboot.repository;
 
 
-import com.example.WebSpringboot.Entity.Memo;
-import com.example.WebSpringboot.Repository.MemoRepository;
+import com.example.WebSpringboot.part01.Entity.Memo;
+import com.example.WebSpringboot.part01.Repository.MemoRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
