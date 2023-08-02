@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 @Builder
 @Data
 @AllArgsConstructor
-//todo : 제네릭
+//dto랑 객체
 public class PageResultDTO<DTO, EN> {
 
     private List<DTO> dtoList;

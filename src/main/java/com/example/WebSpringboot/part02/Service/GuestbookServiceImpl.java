@@ -57,5 +57,24 @@ public class GuestbookServiceImpl implements GuestbookService {
 
     }
 
+    @Override
+    public Long modify(GuestbookDTO dto) {
+// gno를 같이 처리하도록 했는데 왜 안되지? 그리고 null일텐데?
+        if (repository.findById(dto.getGno()) == null) {
+            System.out.println(repository.findById(dto.getGno()));
+            return null;
+        }
+
+        System.out.println(repository.findById(dto.getGno()));
+
+        //dto를 entity로 변경
+        Guestbook entity = dtoToEntity(dto);
+
+        //repository save
+        repository.save(entity);
+
+        return entity.getGno();
+    }
+
 
 }
