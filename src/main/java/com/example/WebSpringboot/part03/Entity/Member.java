@@ -1,7 +1,6 @@
 package com.example.WebSpringboot.part03.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -14,6 +13,7 @@ import lombok.*;
 public class Member extends BaseEntity {
 
     @Id
+   // @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
     private String email;
 
     private String pw;
