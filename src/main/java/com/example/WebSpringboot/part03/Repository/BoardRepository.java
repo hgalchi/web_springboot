@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    @Query("select b,w from board b left join b.writer w where b.bno=:bno")
-    Object getBoardWithWirter(@Param("bno") Long bno);
+    @Query("select b,w from Board b left join b.writer w where b.bno= :bno")
+    Object getBoardWithWriter(@Param("bno") Long bno);
+
+   /* @Query("select *from board")
+    Object getboard();*/
 }

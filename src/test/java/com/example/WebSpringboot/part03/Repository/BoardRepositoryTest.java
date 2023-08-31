@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BoardRepositoryTest {
@@ -50,11 +49,20 @@ class BoardRepositoryTest {
     @Test
     @Transactional
     public void read2() {
-        Object result = boardRepository.getBoardWithWirter(10L);
+        Object result = boardRepository.getBoardWithWriter(10L);
         Object[] arr=(Object[])result;
 
         System.out.println("+++++++++++++++++++++++++++++++");
         System.out.println(Arrays.toString(arr));
+    }
+
+    @Test
+    public  void testReadWithWriter() {
+        Object result = boardRepository.getBoardWithWriter(10L);
+        //Object[] arr = (Object[]) result;
+
+        System.out.println("======================================");
+        System.out.println(result);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.example.WebSpringboot.repository;
 
 import com.example.WebSpringboot.part02.Entity.Guestbook;
-import com.example.WebSpringboot.Entity.QGuestbook;
+import com.example.WebSpringboot.part02.Entity.QGuestbook;
 import com.example.WebSpringboot.part02.Repository.GuestbookRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
