@@ -6,8 +6,13 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -21,9 +26,8 @@ class BoardRepositoryTest {
     public void 보드추가() {
 
 
-
-        IntStream.rangeClosed(1,20).forEach(i->{
-            Member member = Member.builder().email("wyw"+i+"@naver.com").build();
+        IntStream.rangeClosed(1, 20).forEach(i -> {
+            Member member = Member.builder().email("wyw" + i + "@naver.com").build();
 
             Board board = Board.builder()
                     .title(i + "번째 게시물")
@@ -37,7 +41,7 @@ class BoardRepositoryTest {
 
     @Test
     @Transactional
-    public void read1(){
+    public void read1() {
         Optional<Board> result = boardRepository.findById(10L);
 
         Board board = result.get();
@@ -50,19 +54,41 @@ class BoardRepositoryTest {
     @Transactional
     public void read2() {
         Object result = boardRepository.getBoardWithWriter(10L);
-        Object[] arr=(Object[])result;
+        Object[] arr = (Object[]) result;
 
         System.out.println("+++++++++++++++++++++++++++++++");
         System.out.println(Arrays.toString(arr));
     }
 
-    @Test
-    public  void testReadWithWriter() {
-        Object result = boardRepository.getBoardWithWriter(10L);
-        //Object[] arr = (Object[]) result;
 
-        System.out.println("======================================");
-        System.out.println(result);
+    @Test
+    @Transactional
+    public void 게시글과댓글() {
+        List<Object[]> result = boardRepository.getBoardwithReplay(4L);
+        for (Object[] arr : result) {
+            System.out.println(Arrays.toString(arr));
+
+        }
     }
 
+    @Test
+    @Transactional
+    public void 목록pageable() {
+        Pageable pageable= PageRequest.of(0,10, Sort.by("bno").descending());
+        Page<Object[]> result = boardRepository.getBoardWithReplayCount(pageable);
+        result.get().forEach(row->{
+            Object[] arr = (Object[])  row;
+            System.out.println(Arrays.toString(arr));
+
+        });
+    }
+
+    @Test
+    @Transactional
+    public void 특정한게시번호() {
+        Object result = boardRepository.getBoardByBno(14L);
+        Object[] arr = (Object[]) result;
+        System.out.println(Arrays.toString(arr));
+
+    }
 }
