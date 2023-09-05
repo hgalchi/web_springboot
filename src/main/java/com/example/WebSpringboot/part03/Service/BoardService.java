@@ -20,6 +20,15 @@ public interface BoardService {
     //목록처리
     PageResultDTO<BoardDto, Object[]> getList(PageRequestDTO pageRequestDTO);
 
+    //게시물 조회처리
+    BoardDto get(Long bno);
+
+    //게시물 삭제
+    void removeWithReplies(Long bno);
+
+    //게시물 수정
+    void modify(BoardDto boardDto);
+
     //엔티티타입으로 변환
     default Board DtoToEntity(BoardDto dto) {
 

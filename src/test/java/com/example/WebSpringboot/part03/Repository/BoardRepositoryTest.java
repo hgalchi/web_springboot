@@ -1,5 +1,8 @@
 package com.example.WebSpringboot.part03.Repository;
 
+import com.example.WebSpringboot.part02.DTO.PageRequestDTO;
+import com.example.WebSpringboot.part02.DTO.PageResultDTO;
+import com.example.WebSpringboot.part03.Dto.BoardDto;
 import com.example.WebSpringboot.part03.Entity.Board;
 import com.example.WebSpringboot.part03.Entity.Member;
 import jakarta.transaction.Transactional;
@@ -91,4 +94,6 @@ class BoardRepositoryTest {
         System.out.println(Arrays.toString(arr));
 
     }
+
+
 }
