@@ -18,12 +18,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.function.Function;
 
-@Service
 @Log4j2
 @RequiredArgsConstructor
+@Service
 public class BoardServiceImpl implements BoardService {
-
-
 
     private final BoardRepository repository;
     private final ReplyRepository replyRepository;
@@ -62,7 +60,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void modify(BoardDto boardDto) {
-       /* Optional<Board> board = repository.findById(boardDto.getBno());
+        Board board = repository.getById(boardDto.getBno());
 
         if (board != null) {
             Board b = (Board) board;
@@ -70,7 +68,7 @@ public class BoardServiceImpl implements BoardService {
             b.changeTitle(boardDto.getTitle());
 
             repository.save(board);
-        }*/
+        }
     }
 
     @Override

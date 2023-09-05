@@ -67,7 +67,7 @@ class BoardRepositoryTest {
     @Test
     @Transactional
     public void 게시글과댓글() {
-        List<Object[]> result = boardRepository.getBoardwithReplay(4L);
+        List<Object[]> result = boardRepository.getBoardWithReplay(4L);
         for (Object[] arr : result) {
             System.out.println(Arrays.toString(arr));
 
@@ -93,6 +93,11 @@ class BoardRepositoryTest {
         Object[] arr = (Object[]) result;
         System.out.println(Arrays.toString(arr));
 
+    }
+
+    @Test
+    public void 쿼리연결테스트() {
+        boardRepository.search1();
     }
 
 
