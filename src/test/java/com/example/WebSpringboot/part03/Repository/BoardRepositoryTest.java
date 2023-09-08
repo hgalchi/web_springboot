@@ -5,6 +5,7 @@ import com.example.WebSpringboot.part02.DTO.PageResultDTO;
 import com.example.WebSpringboot.part03.Dto.BoardDto;
 import com.example.WebSpringboot.part03.Entity.Board;
 import com.example.WebSpringboot.part03.Entity.Member;
+import com.mysql.cj.log.Log;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,10 +95,18 @@ class BoardRepositoryTest {
         System.out.println(Arrays.toString(arr));
 
     }
-
     @Test
     public void 쿼리연결테스트() {
-        boardRepository.search1();
+        Object board = boardRepository.search4();
+        System.out.println(board);
+
+    }
+
+    @Test
+    public void SearchPageTest() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+        Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
     }
 
 
