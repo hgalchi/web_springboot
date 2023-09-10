@@ -57,6 +57,7 @@ class BoardRepositoryTest {
     @Test
     @Transactional
     public void read2() {
+        //todo : object[] 어떤 방식으로 cast되는지 알아보기
         Object result = boardRepository.getBoardWithWriter(10L);
         Object[] arr = (Object[]) result;
 
@@ -106,7 +107,7 @@ class BoardRepositoryTest {
     public void SearchPageTest() {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
 
-        Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
+        //Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
     }
 
 

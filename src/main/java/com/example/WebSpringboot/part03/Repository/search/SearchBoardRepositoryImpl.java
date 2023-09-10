@@ -101,8 +101,8 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 
     }
 
-    @Override
-    public Page<Object[]> searchPage(String type, String keyword, Pageable pageable) {
+  /*  @Override*/
+    /*public Page<Object[]> searchPage(String type, String keyword, Pageable pageable) {
 
         log.info("searchPage.......................");
 
@@ -129,9 +129,9 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 
                 }
             }
-        }
+        }*/
 
     }
 
 
-}
+
