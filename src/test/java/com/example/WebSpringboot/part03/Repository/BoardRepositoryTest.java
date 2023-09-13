@@ -97,8 +97,9 @@ class BoardRepositoryTest {
 
     }
     @Test
+    @Transactional
     public void 쿼리연결테스트() {
-        Object board = boardRepository.search4();
+        Object board = boardRepository.search2();
         System.out.println(board);
 
     }

@@ -9,6 +9,8 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,29 +20,29 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Log4j2
-public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport implements SearchBoardRepository {
+@Repository
+@RequiredArgsConstructor
+public class SearchBoardRepositoryImpl implements SearchBoardRepository {
 
-    public SearchBoardRepositoryImpl() {
-        super(Board.class);
+    private final JPAQueryFactory factory;
 
-    }
 
     @Override
     public Board search1() {
         log.info("search1...........");
         QBoard board = QBoard.board;
 
-        JPQLQuery<Board> jpqlQuery = from(board);
+       Board result=factory.select(board).from(board).where(board.bno.eq(3L)).fetchOne();
+        /*JPQLQuery<Board> jpqlQuery = from(board);
+        List<Board> result = jpqlQuery.select(board).where(board.bno.eq(4L)).fetch();
+        */
 
-        jpqlQuery.select(board).where(board.bno.eq(4L));
 
         log.info("=================================");
-        log.info(jpqlQuery);
+        log.info(factory);
         log.info("=================================");
 
-        List<Board> result = jpqlQuery.fetch();
-
-        return null;
+        return result;
     }
 
     @Override
@@ -48,8 +50,13 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
         QBoard board = QBoard.board;
         QReplay replay = QReplay.replay;
 
-        JPQLQuery<Board> jpqlQuery = from(board);
-        jpqlQuery.leftJoin(replay).on(replay.board.eq(board));
+        List<Board> result =factory.selectFrom(board).leftJoin(replay).on(replay.board.eq(board)).fetch();
+        /*JPQLQuery<Board> jpqlQuery = from(board);
+        jpqlQuery.leftJoin(replay).on(replay.board.eq(board));*/
+
+        log.info("=================================");
+        log.info(result);
+        log.info("=================================");
 
         return null;
     }
@@ -57,22 +64,26 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 
     public Object search3() {
 
-        QBoard board=QBoard.board;
+        QBoard board = QBoard.board;
         QReplay replay = QReplay.replay;
         QMember member = QMember.member;
 
-        JPQLQuery<Board> jpqlQuery = from(board);
+        List<Tuple> result = factory.select(board, member.email, replay.count())
+                .from(board).leftJoin(member).on(board.writer.eq(member))
+                .leftJoin(replay).on(replay.board.eq(board)).fetch();
+
+       /* JPQLQuery<Board> jpqlQuery = from(board);
         jpqlQuery.leftJoin(member).on(board.writer.eq(member));
         jpqlQuery.leftJoin(replay).on(replay.board.eq(board));
 
-        jpqlQuery.select(board, member.email, replay.count());
+        jpqlQuery.select(board, member.email, replay.count());*/
 
 
         log.info("=================================");
-        log.info(jpqlQuery);
+        log.info(result);
         log.info("=================================");
 
-        List<Board> result = jpqlQuery.fetch();
+
 
         return null;
 
@@ -80,29 +91,41 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 
 
     public Object search4() {
-        QBoard board=QBoard.board;
+       QBoard board = QBoard.board;
         QReplay replay = QReplay.replay;
         QMember member = QMember.member;
 
-        JPQLQuery<Board> jpqlQuery = from(board);
+         factory.select(board, member.email, replay.count()).from(board)
+                .leftJoin(member).on(board.writer.eq(member))
+                .leftJoin(replay).on(replay.board.eq(board))
+                .groupBy(board).fetch();
+
+       /* JPQLQuery<Board> jpqlQuery = from(board);
         jpqlQuery.leftJoin(member).on(board.writer.eq(member));
         jpqlQuery.leftJoin(replay).on(replay.board.eq(board));
 
         JPQLQuery<Tuple> tuple = jpqlQuery.select(board, member.email, replay.count());
         tuple.groupBy(board);
+        List<Board> result = jpqlQuery.fetch();*/
 
         log.info("=================================");
-        log.info(tuple);
+        log.info(factory);
         log.info("=================================");
 
-        List<Board> result = jpqlQuery.fetch();
+
 
         return null;
 
     }
 
-  /*  @Override*/
-    /*public Page<Object[]> searchPage(String type, String keyword, Pageable pageable) {
+    @Override
+    public Board search5() {
+        return null;
+    }
+
+
+   /* @Override
+    public Page<Object[]> searchPage(String type, String keyword, Pageable pageable) {
 
         log.info("searchPage.......................");
 
@@ -127,11 +150,14 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 //todo : 307p
             for (String t : typeArr) {
 
-                }
             }
-        }*/
+        }
 
-    }
+        return
+
+    }*/
+
+}
 
 
 

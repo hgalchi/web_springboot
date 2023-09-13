@@ -17,4 +17,8 @@ public interface SearchBoardRepository {
 
     //Dto를 repository영역에서 사용하지 않기 위해
    // Page<Object[]> searchPage(String type, String keyword, Pageable pageable);
+
+    Board search5();
+
+    //Page<Object[]> searchPage(String type, String keryword, Pageable pageable);
 }
