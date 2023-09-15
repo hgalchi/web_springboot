@@ -2,10 +2,12 @@ package com.example.WebSpringboot.part03.Repository;
 
 import com.example.WebSpringboot.part03.Entity.Board;
 import com.example.WebSpringboot.part03.Entity.Replay;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,6 +37,15 @@ class ReplyRepositoryTest {
 
             repository.save(reply);
         });
+    }
+
+    @Test
+    @Transactional
+    //todo : lazy 영속성 컨텍스트 관련해서 글 작성하기
+    public void 보드리스트() {
+        List<Replay> replyList = repository.getReplayByBoardOrderByRno(Board.builder()
+                .bno(14L).build());
+        replyList.forEach(replay -> System.out.println(replay));
     }
 
 }

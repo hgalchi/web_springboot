@@ -20,6 +20,7 @@ public class Replay extends BaseEntity {
 
     private String replayer;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 }

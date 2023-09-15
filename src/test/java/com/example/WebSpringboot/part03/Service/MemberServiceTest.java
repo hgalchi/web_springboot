@@ -9,6 +9,4 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class MemberServiceTest {
 
-    @Autowired
-    private MemberService memberService;
 }

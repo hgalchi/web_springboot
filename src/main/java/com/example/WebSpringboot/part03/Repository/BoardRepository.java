@@ -32,4 +32,5 @@ public interface BoardRepository extends JpaRepository<Board, Long>, SearchBoard
             "left outer join Replay r on r.board=b " +
             "where b.bno=:bno")
     Object getBoardByBno(@Param("bno") Long bno);
+
 }

@@ -57,7 +57,6 @@ class BoardRepositoryTest {
     @Test
     @Transactional
     public void read2() {
-        //todo : object[] 어떤 방식으로 cast되는지 알아보기
         Object result = boardRepository.getBoardWithWriter(10L);
         Object[] arr = (Object[]) result;
 
@@ -81,6 +80,10 @@ class BoardRepositoryTest {
     public void 목록pageable() {
         Pageable pageable= PageRequest.of(0,10, Sort.by("bno").descending());
         Page<Object[]> result = boardRepository.getBoardWithReplayCount(pageable);
+
+        System.out.println("현재 페이지 정보 : " + result.getNumber());
+        System.out.println("전체 페이지의 수  : " + result.getTotalPages());
+        System.out.println("조회된  데이터 목록 "+result.getContent());
         result.get().forEach(row->{
             Object[] arr = (Object[])  row;
             System.out.println(Arrays.toString(arr));
@@ -108,7 +111,7 @@ class BoardRepositoryTest {
     public void SearchPageTest() {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
 
-        //Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
+        Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
     }
 
 
