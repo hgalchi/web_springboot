@@ -34,7 +34,7 @@ public class QReview extends EntityPathBase<Review> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
 
-    public final Qreviewer reviewer;
+    public final QReviewer reviewer;
 
     public final NumberPath<Long> reviewnum = createNumber("reviewnum", Long.class);
 
@@ -59,7 +59,7 @@ public class QReview extends EntityPathBase<Review> {
     public QReview(Class<? extends Review> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.movie = inits.isInitialized("movie") ? new QMovie(forProperty("movie")) : null;
-        this.reviewer = inits.isInitialized("reviewer") ? new Qreviewer(forProperty("reviewer")) : null;
+        this.reviewer = inits.isInitialized("reviewer") ? new QReviewer(forProperty("reviewer")) : null;
     }
 
 }

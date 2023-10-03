@@ -10,16 +10,18 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * Qreviewer is a Querydsl query type for reviewer
+ * QReviewer is a Querydsl query type for Reviewer
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class Qreviewer extends EntityPathBase<reviewer> {
+public class QReviewer extends EntityPathBase<Reviewer> {
 
-    private static final long serialVersionUID = 1532708261L;
+    private static final long serialVersionUID = 1597352389L;
 
-    public static final Qreviewer reviewer = new Qreviewer("reviewer");
+    public static final QReviewer reviewer = new QReviewer("reviewer");
 
     public final com.example.WebSpringboot.part03.Entity.QBaseEntity _super = new com.example.WebSpringboot.part03.Entity.QBaseEntity(this);
+
+    public final StringPath email = createString("email");
 
     public final NumberPath<Long> mid = createNumber("mid", Long.class);
 
@@ -33,16 +35,16 @@ public class Qreviewer extends EntityPathBase<reviewer> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
 
-    public Qreviewer(String variable) {
-        super(reviewer.class, forVariable(variable));
+    public QReviewer(String variable) {
+        super(Reviewer.class, forVariable(variable));
     }
 
-    public Qreviewer(Path<? extends reviewer> path) {
+    public QReviewer(Path<? extends Reviewer> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public Qreviewer(PathMetadata metadata) {
-        super(reviewer.class, metadata);
+    public QReviewer(PathMetadata metadata) {
+        super(Reviewer.class, metadata);
     }
 
 }

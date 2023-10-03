@@ -17,7 +17,7 @@ public class Review extends BaseEntity {
     private Long reviewnum;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private reviewer reviewer;
+    private Reviewer reviewer;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
