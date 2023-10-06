@@ -69,12 +69,10 @@ class MovieRepositoryTest {
 
     }
 
-    //todo:377
     @Test
     public void 영화이미지() {
         List<Object[]> result = movieRepository.getMovieWithAll((long) 1);
         result.forEach(i -> System.out.println(Arrays.toString(i)));
-
     }
 
 

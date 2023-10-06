@@ -18,6 +18,7 @@ class ReplyServiceImplTest {
     @Test
     public void testGetList() {
         Long bno=12L;
+        //여기에 getre가 사용됭고 있다.
         List<ReplyDTO> list = service.getList(bno);
         list.forEach((dto) -> System.out.println(dto));
     }

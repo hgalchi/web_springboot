@@ -1,12 +1,16 @@
 package com.example.WebSpringboot.part04.Repository;
 
 import com.example.WebSpringboot.part04.Entity.Movie;
+import com.example.WebSpringboot.part04.Entity.MoviewImage;
 import com.example.WebSpringboot.part04.Entity.Review;
 import com.example.WebSpringboot.part04.Entity.Reviewer;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,15 +20,13 @@ class ReviewRepositoryTest {
 
     @Autowired
     private ReviewRepository reviewRepository;
-    //1~5점까지의 평점과 리뷰 내용을 등록
+
     @Test
     public void review등록() {
 
-
-
         IntStream.rangeClosed(1,5).forEach(i->{
             //리뷰어 번호
-            Long mid = ((long) (Math.random() * 20) + 1);
+            Long mid = ((long) (Math.random() * 5) + 1);
             Reviewer reviewer = Reviewer.builder().mid(mid).build();
 
             Review r = Review.builder()
@@ -35,9 +37,34 @@ class ReviewRepositoryTest {
                     .build();
             reviewRepository.save(r);
         });
+    }
 
+    @Test
+    public void Movie추출(){
+        Movie m = Movie.builder().mno((long) 2).build();
+        List<Review> listMovie = reviewRepository.findByMovie(m);
 
+        listMovie.forEach(i->{
+            System.out.println(i.getReviewnum());
+            System.out.println(i.getGrade());
+            System.out.println(i.getReviewer().getEmail());
+            System.out.println(i.getText());
+            System.out.println("=============================");
+        });
+    }
 
+    @Test
+    @Transactional
+    @Commit
+    public void 삭제transaction(){
+
+        Long mid=(long)5;
+        Reviewer reviewer = Reviewer.builder().mid(mid).build();
+
+        reviewRepository.deleteById(mid);
+
+        reviewRepository.deleteByReviewer(reviewer);
+        //회원 삭제
 
     }
 

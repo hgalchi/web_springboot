@@ -23,10 +23,7 @@ class ReplyRepositoryTest {
         IntStream.rangeClosed(1, 20).forEach(i -> {
             long bno = (long)(Math.random()*20)+1;
 
-            /*todo : 참조하는 테이블을 찾아서 넣어준것도 아닌데?,
-          save하지도 않았는데 왜 튜플이 자동으로 생성된거지?
 
-             */
             Board board = Board.builder().bno(bno).build();
 
             Replay reply = Replay.builder()

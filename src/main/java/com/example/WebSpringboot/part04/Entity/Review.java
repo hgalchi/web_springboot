@@ -19,13 +19,10 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Reviewer reviewer;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
 
     private int grade;
 
     private String text;
-
-
 }

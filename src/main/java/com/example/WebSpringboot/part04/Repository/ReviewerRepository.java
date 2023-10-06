@@ -9,6 +9,4 @@ import org.springframework.data.domain.Pageable;
 
 public interface ReviewerRepository extends JpaRepository<Reviewer, Long> {
 
-
-
 }

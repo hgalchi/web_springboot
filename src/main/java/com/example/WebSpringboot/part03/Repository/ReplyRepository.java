@@ -21,6 +21,5 @@ public interface ReplyRepository extends JpaRepository<Replay, Long> {
 
     void deleteByRno(Long rno);
 
-    //todo : 테이블이름은 reply인데 왜 replies라고 명시되어 있지?
     List<Replay> getRepliesByBoardOrderByRno(Board board);
 }

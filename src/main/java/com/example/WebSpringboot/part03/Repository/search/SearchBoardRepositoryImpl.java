@@ -171,7 +171,6 @@ public class SearchBoardRepositoryImpl implements SearchBoardRepository {
                 .leftJoin(replay).on(replay.board.eq(board));
 
         query.where(booleanBuilder);
-        //todo: qpaging처리 정리 하기
 
         //order by
         Sort sort = pageable.getSort();
