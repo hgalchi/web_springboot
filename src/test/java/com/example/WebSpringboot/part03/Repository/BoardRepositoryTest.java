@@ -102,16 +102,19 @@ class BoardRepositoryTest {
     @Test
     @Transactional
     public void 쿼리연결테스트() {
-        Object board = boardRepository.search2();
-        System.out.println(board);
+        Object result = boardRepository.search5();
+
+        System.out.println(result);
 
     }
 
     @Test
     public void SearchPageTest() {
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("title").ascending());
 
         Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
+
+        System.out.println("결과"+result);
     }
 
 

@@ -40,10 +40,6 @@ public class SearchBoardRepositoryImpl implements SearchBoardRepository {
         QBoard board = QBoard.board;
 
        Board result=factory.select(board).from(board).where(board.bno.eq(3L)).fetchOne();
-        /*JPQLQuery<Board> jpqlQuery = from(board);
-        List<Board> result = jpqlQuery.select(board).where(board.bno.eq(4L)).fetch();
-        */
-
 
         log.info("=================================");
         log.info(factory);
@@ -102,35 +98,33 @@ public class SearchBoardRepositoryImpl implements SearchBoardRepository {
         QReplay replay = QReplay.replay;
         QMember member = QMember.member;
 
-         factory.select(board, member.email, replay.count()).from(board)
+        List<Tuple> result =factory.select(board, member.email, replay.count()).from(board)
                 .leftJoin(member).on(board.writer.eq(member))
                 .leftJoin(replay).on(replay.board.eq(board))
                 .groupBy(board).fetch();
-
-       /* JPQLQuery<Board> jpqlQuery = from(board);
-        jpqlQuery.leftJoin(member).on(board.writer.eq(member));
-        jpqlQuery.leftJoin(replay).on(replay.board.eq(board));
-
-        JPQLQuery<Tuple> tuple = jpqlQuery.select(board, member.email, replay.count());
-        tuple.groupBy(board);
-        List<Board> result = jpqlQuery.fetch();*/
-
-        log.info("=================================");
-        log.info(factory);
         log.info("=================================");
 
+        result.forEach(i->{
+            Board b = i.get(board);
+            String memberEmail = i.get(member.email);
+            System.out.println("board" + b);
+            System.out.println("member.email"+member);
+            log.info("=================================");
+
+        });
 
 
-        return null;
+        return result;
 
     }
 
     @Override
-    public Board search5() {
+    public Board getNoteList() {
         return null;
     }
 
 
+    //todo : querydsl 정리
     @Override
     public Page<Object[]> searchPage(String type, String keyword, Pageable pageable) {
 
@@ -176,8 +170,11 @@ public class SearchBoardRepositoryImpl implements SearchBoardRepository {
         Sort sort = pageable.getSort();
 
         //요청받은  query결과를 정렬
+        //Sort.by("bno").descending()
         sort.stream().forEach(order->{
-            Order direction=order.isAscending()?Order.ASC:Order.DESC;
+            //order.desc
+            Order direction = order.isAscending() ? Order.ASC : Order.DESC;
+            //"bno"
             String prop = order.getProperty();
             PathBuilder orderByExpresion = new PathBuilder<>(Board.class, "board");
 

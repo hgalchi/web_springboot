@@ -62,7 +62,6 @@ class ReviewRepositoryTest {
         Reviewer reviewer = Reviewer.builder().mid(mid).build();
 
         reviewRepository.deleteById(mid);
-
         reviewRepository.deleteByReviewer(reviewer);
         //회원 삭제
 
